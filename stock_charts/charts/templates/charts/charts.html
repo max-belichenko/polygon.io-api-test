@@ -1,0 +1,89 @@
+{% load l10n %}
+
+<html>
+  <head>
+    <style type="text/css">
+      BODY { font: 10pt Arial, Helvetica, sans-serif; }
+    </style>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+  function drawChart() {
+    var data = google.visualization.arrayToDataTable([
+    {% localize off %}
+      {% for item in data %}
+        {% if item.open_price < item.close_price %}
+          ['{{ item.dt }}', {{ item.lowest_price }}, {{ item.open_price }}, {{ item.close_price }}, {{ item.highest_price }}],  // ^{{item.pk}}
+        {% else %}
+          ['{{ item.dt }}', {{ item.highest_price }}, {{ item.open_price }}, {{ item.close_price }}, {{ item.lowest_price }}],  // .{{item.pk}}
+        {% endif %}
+      {% endfor %}
+    {% endlocalize %}
+    ], true);
+
+    var options = {
+      legend:'none'
+    };
+
+    var chart = new google.visualization.CandlestickChart(document.getElementById('chart_div'));
+
+    chart.draw(data, options);
+  }
+    </script>
+  </head>
+  <body>
+    <div>
+      <form method="post">
+        {% csrf_token %}
+
+        <div class="invalid-feedback">
+            {{ form.non_field.errors }}
+        </div>
+
+        <div class="row">
+            <div class="col">
+              Symbol:<br>
+              {{ form.symbol }}<br>
+              <span style="color: #ff3333">{{ form.symbol.errors }}</span>
+            </div><br>
+            <div class="col">
+              From date:<br>
+              {{ form.from_date }}<br>
+              <span style="color: #ff3333; font-size: smaller;">{{ form.from_date.errors }}</span>
+            </div><br>
+            <div class="col">
+              To date:<br>
+              {{ form.to_date }}<br>
+              <span style="color: #ff3333; font-size: smaller;">{{ form.to_date.errors }}</span>
+            </div><br>
+            <div class="col">
+              Timespan:<br>
+              {{ form.timespan }}<br>
+              <span style="color: #ff3333; font-size: smaller;">{{ form.timespan.errors }}</span>
+            </div><br>
+            <div class="col">
+              Timespan multiplier:<br>
+              {{ form.timespan_multiplier }}<br>
+              <span style="color: #ff3333; font-size: smaller;">{{ form.timespan_multiplier.errors }}</span>
+            </div><br>
+            <div class="col">
+              Limit (Limits the number of base aggregates queried to create the aggregate results):<br>
+              {{ form.limit }}<br>
+              <span style="color: #ff3333; font-size: smaller;">{{ form.limit.errors }}</span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <button type="submit" class="site-button "> <span>Применить</span> </button>
+            </div>
+        </div>
+    </form>
+    </div>
+
+    <div id="chart_div" style="width: 1500px; height: 900px;"></div>
+
+
+  </body>
+</html>

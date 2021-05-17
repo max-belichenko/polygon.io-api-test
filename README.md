@@ -13,12 +13,14 @@
 
 <h1>Инструкция по установке</h1>
 
-git clone https://github.com/max-belichenko/polygon.io-api-test.git
-cd polygon.io-api-test
-python -m venv venv		# python3 -m venv venv
-venv\Scripts\activate	# source venv/bin/activate	## for Linux
-pip install -r requirements.txt	# pip3 install -r requirements.txt
-cd stock_charts
-python manage.py makemigrations # python3 manage.py makemigrations
-python manage.py migrate  # python3 manage.py migrate
-python manage.py runserver  # python3 manage.py runserver
+<ol>
+  <li>git clone https://github.com/max-belichenko/polygon.io-api-test.git</li>
+<li>cd polygon.io-api-test</li>
+<li>python -m venv venv		# python3 -m venv venv</li>
+<li>venv\Scripts\activate	# source venv/bin/activate	## for Linux</li>
+<li>pip install -r requirements.txt	# pip3 install -r requirements.txt</li>
+<li>cd stock_charts</li>
+<li>python manage.py makemigrations # python3 manage.py makemigrations</li>
+<li>python manage.py migrate  # python3 manage.py migrate</li>
+<li>python manage.py runserver  # python3 manage.py runserver</li>
+</ol>

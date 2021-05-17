@@ -20,7 +20,7 @@
 <li><b>venv\Scripts\activate</b>	# source venv/bin/activate	## for Linux</li>
 <li><b>pip install -r requirements.txt</b>	# pip3 install -r requirements.txt</li>
 <li><b>cd stock_charts</b></li>
-<li><b>python manage.py makemigrations charts</b> # python3 manage.py makemigrations</li>
+<li><b>python manage.py makemigrations charts</b> # python3 manage.py makemigrations charts</li>
 <li><b>python manage.py migrate</b>  # python3 manage.py migrate</li>
 <li><b>python manage.py runserver</b>  # python3 manage.py runserver</li>
 </ol>
